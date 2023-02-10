@@ -1,0 +1,38 @@
+version: "3.8"
+
+services:
+  frontend:
+    depends_on:
+      - backend
+    build: ./frontend
+    ports:
+      - 3000:3000
+
+  backend:
+    depends_on:
+      - db-movies
+      - db-shows
+    build: ./backend
+    ports:
+      - 3001:3001
+    command: ./docker-entrypoint.sh
+
+  db-movies:
+    image: mongo:4.0-xenial
+    ports:
+      - 27017:27017
+    volumes:
+      - project1:/data/db
+
+  db-shows:
+    image: mongo:4.0-xenial
+    ports:
+      - 27018:27017
+    volumes:
+      - project2:/data/db
+
+volumes:
+  project2:
+    driver: local
+  project1:
+    driver: local
