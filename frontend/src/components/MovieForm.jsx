@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Input from "./Input";
 
-function MovieForm({ onAddMovie }) {
+function MovieForm({ onAddMovie, placeholder }) {
   const [title, setTitle] = useState("");
 
   const handleChange = (e) => setTitle(e.target.value);
@@ -20,7 +20,7 @@ function MovieForm({ onAddMovie }) {
       <Input
         aria-label="New Movie"
         onChange={handleChange}
-        placeholder="Add a new movie..."
+        placeholder={placeholder}
         type="text"
         value={title}
       />

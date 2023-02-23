@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "./Input";
 
 function TitleForm({onSearchTitle, searchResult}) {
   const [title, setTitle] = useState("");
-  const handleChange = (e) => setTitle(e.target.value);
+  const handleChange = (e) => setTitle(e.target.value)
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -26,15 +26,16 @@ function TitleForm({onSearchTitle, searchResult}) {
     response = `O título ${title} não está presente em nenhum banco de dados.`;
   }
 
+  useEffect(()=>onSearchTitle(title), [title]);
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <Input
         aria-label="Pesquisa no Banco"
         onChange={handleChange}
-        placeholder="Search a title..."
+        placeholder="Pesquise um título"
         type="text"
-        value={title}
         />
       </form>
       <h3>

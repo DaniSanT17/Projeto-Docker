@@ -46,11 +46,16 @@ function App() {
   };
 
   const titleSearch = async (title) => {
+    if (title === ""){
+      setSearchResult({
+        movie: null,
+        show: null
+      });
+      return;
+    }
     try {
-      console.log(title);
       const { data } = await api.get(compareEndpoint+"/"+title);
       setSearchResult(data);
-      console.log(searchResult);
     } catch (error) {
       console.log("Could not fetch the movies!");
     }
@@ -99,23 +104,23 @@ function App() {
     <div className="App">
       <div className="movieContainer">
         <h1>Banco de dados de filmes - MoviesDB</h1>
-        <MovieForm onAddMovie={handleAddMovie} />
+        <MovieForm onAddMovie={handleAddMovie} placeholder="Adicione seu filme favorito!" />
         {error && (
           <p role="alert" className="Error">
             {error}
           </p>
         )}
-        <MovieList movies={movies} onDeleteMovie={handleDeleteMovie} />
+        <MovieList movies={movies} onDeleteMovie={handleDeleteMovie} type="MovieItem" />
       </div>
       <div className="showContainer">
         <h1>Banco de dados de séries - ShowsDB</h1>
-        <MovieForm onAddMovie={handleAddShow} />
+        <MovieForm onAddMovie={handleAddShow} placeholder="Adicione sua série favorita!" />
         {error && (
           <p role="alert" className="Error">
             {error}
           </p>
         )}
-        <MovieList movies={shows} onDeleteMovie={handleDeleteShow} />
+        <MovieList movies={shows} onDeleteMovie={handleDeleteShow} type="ShowItem"/>
       </div>
       <div className="compareContainer">
         <h1>Comparar se um título pertence aos dois bancos</h1>

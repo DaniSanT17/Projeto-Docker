@@ -2,7 +2,7 @@ import React from "react";
 import MovieListItem from "./MovieListItem";
 import "./MovieList.css";
 
-function MovieList({ movies, onDeleteMovie }) {
+function MovieList({ movies, onDeleteMovie, type }) {
   return (
     <ul className="MovieList">
       {movies.map((movie) => (
@@ -10,6 +10,7 @@ function MovieList({ movies, onDeleteMovie }) {
           key={movie._id}
           movie={movie}
           onDeleteMovie={() => onDeleteMovie(movie)}
+          type = {type}
         />
       ))}
     </ul>
